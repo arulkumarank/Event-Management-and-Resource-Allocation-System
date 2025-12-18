@@ -140,35 +140,82 @@ Algorithm: Two events conflict if (start1 < end2) AND (end1 > start2)
 
 ## Sample Data
 
-The application includes test cases for:
-- 4 Resources (Conference Room A, Projector, Instructor John, Laptop)
-- 4 Events with intentional time overlaps
-- Multiple allocations demonstrating conflict scenarios
+The application includes a seed script (`seed_data.py`) that creates test data:
+
+**4 Resources:**
+- Conference Room A (room)
+- HD Projector (equipment)
+- Instructor John (instructor)
+- Laptop with HDMI (equipment)
+
+**4 Events with intentional time overlaps:**
+- Python Workshop: 09:00 - 11:00
+- Data Science Seminar: 10:00 - 12:00 (overlaps with Python Workshop)
+- Web Development Class: 14:00 - 16:00
+- Database Workshop: 15:00 - 17:00 (overlaps with Web Development Class)
+
+**8 Allocations demonstrating conflict scenarios:**
+- All events use Conference Room A (creates 2 conflicts)
+- Various equipment and instructor assignments
+
+Run the seed script:
+```
+python seed_data.py
+```
 
 ## Screenshots
 
+All screenshots are available in the `screenshots/` directory.
+
 ### Dashboard
-The main dashboard shows system statistics and quick action buttons.
+![Dashboard](screenshots/dashboard.png)
+
+The main dashboard shows system statistics (4 events, 4 resources, 8 allocations) and quick action buttons for creating events, adding resources, and allocating resources.
 
 ### Events Management
-View, create, edit, and delete events with datetime pickers.
+![Events List](screenshots/events.png)
+
+View all events in a clean table format with start/end times, descriptions, and action buttons for editing or deleting events. The interface uses datetime pickers for easy time selection.
 
 ### Resources Management
-Manage all types of resources with simple forms.
+![Resources List](screenshots/resources.png)
+
+Manage all types of resources (rooms, instructors, equipment) with a simple table view. The form includes a dropdown for resource type selection.
 
 ### Resource Allocation
-Allocate multiple resources to events with inline conflict warnings.
+The allocation interface allows you to select an event and assign multiple resources via checkboxes. The system displays all current allocations in a table below the form.
 
 ### Conflict Detection
-Automatically detects and displays all resource booking conflicts.
+![Conflicts View](screenshots/conflicts.png)
+
+The system automatically detected 2 conflicts where Conference Room A was double-booked:
+- Python Workshop (09:00-11:00) vs Data Science Seminar (10:00-12:00)
+- Web Development Class (14:00-16:00) vs Database Workshop (15:00-17:00)
+
+Each conflict shows the resource name, conflicting events, and exact time overlaps.
 
 ### Utilization Report
-Generate reports showing resource usage over custom date ranges.
+![Utilization Report](screenshots/utilization.png)
+
+Generate reports for custom date ranges showing:
+- Conference Room A: 8.0 hours utilized
+- Instructor John: 4.0 hours utilized
+- HD Projector: 2.0 hours utilized
+- Laptop with HDMI: 2.0 hours utilized
+
+The report includes upcoming bookings for each resource.
 
 ## Video Demonstration
 
 A complete walkthrough video demonstrating all features is available at:
-[Link to be added]
+
+![Demo Recording](screenshots/demo_recording.webp)
+
+The recording shows:
+- Navigating through all pages
+- Viewing resources and events
+- Checking conflict detection
+- Generating utilization reports
 
 ## Project Structure
 
@@ -177,20 +224,28 @@ event-scheduler/
 ├── app.py                  Main Flask application
 ├── models.py              Database models
 ├── utils.py               Utility functions
+├── seed_data.py           Sample data generator
 ├── requirements.txt       Python dependencies
 ├── database.db            SQLite database
 ├── static/
 │   └── style.css         Minimalistic stylesheet
-└── templates/
-    ├── base.html         Base template
-    ├── index.html        Dashboard
-    ├── events.html       Event listing
-    ├── event_form.html   Event form
-    ├── resources.html    Resource listing
-    ├── resource_form.html Resource form
-    ├── allocate.html     Allocation interface
-    ├── conflicts.html    Conflict view
-    └── utilization.html  Report view
+├── templates/
+│   ├── base.html         Base template
+│   ├── index.html        Dashboard
+│   ├── events.html       Event listing
+│   ├── event_form.html   Event form
+│   ├── resources.html    Resource listing
+│   ├── resource_form.html Resource form
+│   ├── allocate.html     Allocation interface
+│   ├── conflicts.html    Conflict view
+│   └── utilization.html  Report view
+└── screenshots/
+    ├── dashboard.png     Dashboard screenshot
+    ├── events.png        Events list screenshot
+    ├── resources.png     Resources list screenshot
+    ├── conflicts.png     Conflicts view screenshot
+    ├── utilization.png   Utilization report screenshot
+    └── demo_recording.webp Demo video
 ```
 
 ## Development Notes
@@ -211,6 +266,23 @@ event-scheduler/
 - Recurring events support
 - Multi-language support
 
-## Author
+## Submission
 
-Developed as part of technical assessment for web application development skills.
+This project is ready for submission to Aerele for technical assessment.
+
+### Included:
+- Complete working Flask application
+- Clean, minimalistic UI design
+- Comprehensive conflict detection logic
+- Resource utilization reporting
+- Sample data for testing
+- Screenshots of all views
+- Demo video recording
+- Detailed documentation
+
+The application demonstrates:
+- Strong understanding of web application architecture
+- Database design and ORM usage
+- Business logic implementation
+- Clean code structure
+- User interface design
