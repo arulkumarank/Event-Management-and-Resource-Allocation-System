@@ -213,14 +213,15 @@ Generate reports for custom date ranges showing resource usage hours and upcomin
 
 ## Video Demonstration
 
-![Complete System Demonstration](screenshots/demo_video.webp)
+![Complete System Demonstration](screenshots/EventSchedulingAndResourceAllocationSystem.mp4)
 
 A complete walkthrough video demonstrating:
-- Live conflict detection testing
-- Attempting blocked allocations (shows error messages)
-- Successful allocations (increases conflict count)
-- Dynamic conflict page updates
-- All system features in action
+- Navigating through all pages
+- Creating and managing events
+- Resource allocation workflow
+- Conflict detection in action
+- Utilization report generation
+- All system features
 
 ## Project Structure
 
