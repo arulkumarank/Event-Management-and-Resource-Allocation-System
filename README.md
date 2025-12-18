@@ -189,12 +189,6 @@ The allocation interface allows you to select an event and assign multiple resou
 
 The system automatically detects and displays all resource conflicts:
 
-**Initial State (7 conflicts):**
-![Conflict Detection - Initial](screenshots/conflict_detection_before.png)
-
-**After Testing (8 conflicts):**
-![Conflict Detection - After Allocation](screenshots/conflict_detection_after.png)
-
 The conflict detection system shows:
 - Resources that are allocated to overlapping events
 - Exact time periods of conflicts
