@@ -165,38 +165,28 @@ python seed_data.py
 
 ## Screenshots
 
-All screenshots are available in the `screenshots/` directory.
+Screenshots will be added to demonstrate:
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
-
 The main dashboard shows system statistics (4 events, 4 resources, 8 allocations) and quick action buttons for creating events, adding resources, and allocating resources.
 
 ### Events Management
-![Events List](screenshots/events.png)
-
 View all events in a clean table format with start/end times, descriptions, and action buttons for editing or deleting events. The interface uses datetime pickers for easy time selection.
 
 ### Resources Management
-![Resources List](screenshots/resources.png)
-
 Manage all types of resources (rooms, instructors, equipment) with a simple table view. The form includes a dropdown for resource type selection.
 
 ### Resource Allocation
 The allocation interface allows you to select an event and assign multiple resources via checkboxes. The system displays all current allocations in a table below the form.
 
 ### Conflict Detection
-![Conflicts View](screenshots/conflicts.png)
-
-The system automatically detected 2 conflicts where Conference Room A was double-booked:
+The system automatically detects conflicts where resources are double-booked, showing:
 - Python Workshop (09:00-11:00) vs Data Science Seminar (10:00-12:00)
 - Web Development Class (14:00-16:00) vs Database Workshop (15:00-17:00)
 
 Each conflict shows the resource name, conflicting events, and exact time overlaps.
 
 ### Utilization Report
-![Utilization Report](screenshots/utilization.png)
-
 Generate reports for custom date ranges showing:
 - Conference Room A: 8.0 hours utilized
 - Instructor John: 4.0 hours utilized
@@ -207,11 +197,7 @@ The report includes upcoming bookings for each resource.
 
 ## Video Demonstration
 
-A complete walkthrough video demonstrating all features is available at:
-
-![Demo Recording](screenshots/demo_recording.webp)
-
-The recording shows:
+A complete walkthrough video demonstrating all features will be included showing:
 - Navigating through all pages
 - Viewing resources and events
 - Checking conflict detection
@@ -220,32 +206,26 @@ The recording shows:
 ## Project Structure
 
 ```
-event-scheduler/
 ├── app.py                  Main Flask application
 ├── models.py              Database models
 ├── utils.py               Utility functions
 ├── seed_data.py           Sample data generator
 ├── requirements.txt       Python dependencies
-├── database.db            SQLite database
+├── .gitignore            Git ignore file
+├── README.md             Project documentation
+├── QUICKSTART.md         Quick start guide
 ├── static/
 │   └── style.css         Minimalistic stylesheet
-├── templates/
-│   ├── base.html         Base template
-│   ├── index.html        Dashboard
-│   ├── events.html       Event listing
-│   ├── event_form.html   Event form
-│   ├── resources.html    Resource listing
-│   ├── resource_form.html Resource form
-│   ├── allocate.html     Allocation interface
-│   ├── conflicts.html    Conflict view
-│   └── utilization.html  Report view
-└── screenshots/
-    ├── dashboard.png     Dashboard screenshot
-    ├── events.png        Events list screenshot
-    ├── resources.png     Resources list screenshot
-    ├── conflicts.png     Conflicts view screenshot
-    ├── utilization.png   Utilization report screenshot
-    └── demo_recording.webp Demo video
+└── templates/
+    ├── base.html         Base template
+    ├── index.html        Dashboard
+    ├── events.html       Event listing
+    ├── event_form.html   Event form
+    ├── resources.html    Resource listing
+    ├── resource_form.html Resource form
+    ├── allocate.html     Allocation interface
+    ├── conflicts.html    Conflict view
+    └── utilization.html  Report view
 ```
 
 ## Development Notes
