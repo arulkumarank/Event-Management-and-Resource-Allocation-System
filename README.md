@@ -187,7 +187,7 @@ The allocation interface allows you to select an event and assign multiple resou
 
 ### Conflict Detection
 
-**[▶️ Watch Conflict Detection Demo](screenshots/ConflictDetection.mp4)**
+**[▶️ Watch Conflict Detection Demo](https://drive.google.com/file/d/1vpkBGad2hU2gwj2mXYK5g_1ceUuv7_lk/view?usp=drive_link)**
 
 The system automatically detects and displays all resource conflicts:
 
@@ -209,7 +209,7 @@ Generate reports for custom date ranges showing resource usage hours and upcomin
 
 ## Video Demonstration
 
-**[▶️ Watch Complete System Demonstration](screenshots/EventSchedulingAndResourceAllocationSystem.mp4)**
+**[▶️ Watch Complete System Demonstration](https://drive.google.com/file/d/1oCt27xb48HihzI9QePJcqQaAYUzI51tO/view?usp=drive_link)**
 
 A complete walkthrough video demonstrating:
 - Navigating through all pages
