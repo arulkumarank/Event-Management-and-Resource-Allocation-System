@@ -187,6 +187,8 @@ The allocation interface allows you to select an event and assign multiple resou
 
 ### Conflict Detection
 
+![Conflict Detection Demonstration](screenshots/ConflictDetection.mp4)
+
 The system automatically detects and displays all resource conflicts:
 
 The conflict detection system shows:
