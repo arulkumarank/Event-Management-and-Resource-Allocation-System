@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Allocate Resources{% endblock %}
+
+{% block content %}
+<h2>Allocate Resources to Events</h2>
+
+<div class="card">
+    <form method="POST">
+        <div class="form-group">
+            <label for="event_id">Select Event</label>
+            <select id="event_id" name="event_id" required>
+                <option value="">Choose an event</option>
+                {% for event in events %}
+                <option value="{{ event.event_id }}">{{ event.title }} ({{ event.start_time.strftime('%Y-%m-%d %H:%M')
+                    }} - {{ event.end_time.strftime('%H:%M') }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Select Resources</label>
+            <div class="resource-list">
+                {% for resource in resources %}
+                <label class="resource-checkbox">
+                    <input type="checkbox" name="resource_ids" value="{{ resource.resource_id }}">
+                    <span>{{ resource.resource_name }} ({{ resource.resource_type }})</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Allocate Resources</button>
+        </div>
+    </form>
+</div>
+
+<div class="allocated-resources">
+    <h3>Current Allocations</h3>
+    {% if allocations %}
+    <table>
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Resource</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allocation in allocations %}
+            <tr>
+                <td>{{ allocation.event.title }}</td>
+                <td>{{ allocation.resource.resource_name }} ({{ allocation.resource.resource_type }})</td>
+                <td>{{ allocation.event.start_time.strftime('%Y-%m-%d %H:%M') }} - {{
+                    allocation.event.end_time.strftime('%H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No allocations yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

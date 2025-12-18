@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Conflict Detection{% endblock %}
+
+{% block content %}
+<h2>Conflict Detection</h2>
+
+<div class="card">
+    {% if conflicts %}
+    <p>Found {{ conflicts|length }} conflict(s):</p>
+    {% for conflict in conflicts %}
+    <div class="conflict-item">
+        <h4>Resource: {{ conflict.resource.resource_name }} ({{ conflict.resource.resource_type }})</h4>
+        <p><strong>Conflict between:</strong></p>
+        <p>Event 1: {{ conflict.event1.title }} ({{ conflict.event1.start_time.strftime('%Y-%m-%d %H:%M') }} - {{
+            conflict.event1.end_time.strftime('%H:%M') }})</p>
+        <p>Event 2: {{ conflict.event2.title }} ({{ conflict.event2.start_time.strftime('%Y-%m-%d %H:%M') }} - {{
+            conflict.event2.end_time.strftime('%H:%M') }})</p>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="no-data">
+        <p>No conflicts detected. All resource allocations are valid.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

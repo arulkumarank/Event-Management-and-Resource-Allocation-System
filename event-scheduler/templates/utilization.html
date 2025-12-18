@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Resource Utilization Report{% endblock %}
+
+{% block content %}
+<h2>Resource Utilization Report</h2>
+
+<div class="date-filter">
+    <form method="POST">
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="date" id="start_date" name="start_date" value="{% if start_date %}{{ start_date }}{% endif %}"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="date" id="end_date" name="end_date" value="{% if end_date %}{{ end_date }}{% endif %}"
+                required>
+        </div>
+
+        <button type="submit" class="btn">Generate Report</button>
+    </form>
+</div>
+
+{% if report_data %}
+<div class="card">
+    <h3>Utilization Report ({{ start_date }} to {{ end_date }})</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Resource</th>
+                <th>Type</th>
+                <th>Total Hours Utilized</th>
+                <th>Upcoming Bookings</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in report_data %}
+            <tr>
+                <td>{{ item.resource.resource_name }}</td>
+                <td>{{ item.resource.resource_type }}</td>
+                <td>{{ item.total_hours }} hours</td>
+                <td>
+                    {% if item.upcoming_bookings %}
+                    <div class="upcoming-bookings">
+                        <ul>
+                            {% for booking in item.upcoming_bookings %}
+                            <li>{{ booking.title }} ({{ booking.start_time.strftime('%Y-%m-%d %H:%M') }})</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% else %}
+                    No upcoming bookings
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}

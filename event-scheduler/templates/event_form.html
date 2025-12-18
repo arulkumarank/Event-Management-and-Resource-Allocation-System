@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if event %}Edit Event{% else %}Add Event{% endif %}{% endblock %}
+
+{% block content %}
+<h2>{% if event %}Edit Event{% else %}Add New Event{% endif %}</h2>
+
+<div class="card">
+    <form method="POST">
+        <div class="form-group">
+            <label for="title">Event Title</label>
+            <input type="text" id="title" name="title" value="{% if event %}{{ event.title }}{% endif %}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="start_time">Start Time</label>
+            <input type="datetime-local" id="start_time" name="start_time"
+                value="{% if event %}{{ event.start_time.strftime('%Y-%m-%dT%H:%M') }}{% endif %}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="end_time">End Time</label>
+            <input type="datetime-local" id="end_time" name="end_time"
+                value="{% if event %}{{ event.end_time.strftime('%Y-%m-%dT%H:%M') }}{% endif %}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description">{% if event %}{{ event.description }}{% endif %}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">{% if event %}Update Event{% else %}Create Event{% endif %}</button>
+            <a href="{{ url_for('events') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

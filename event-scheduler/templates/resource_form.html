@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if resource %}Edit Resource{% else %}Add Resource{% endif %}{% endblock %}
+
+{% block content %}
+<h2>{% if resource %}Edit Resource{% else %}Add New Resource{% endif %}</h2>
+
+<div class="card">
+    <form method="POST">
+        <div class="form-group">
+            <label for="resource_name">Resource Name</label>
+            <input type="text" id="resource_name" name="resource_name"
+                value="{% if resource %}{{ resource.resource_name }}{% endif %}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="resource_type">Resource Type</label>
+            <select id="resource_type" name="resource_type" required>
+                <option value="">Select Type</option>
+                <option value="room" {% if resource and resource.resource_type=='room' %}selected{% endif %}>Room
+                </option>
+                <option value="instructor" {% if resource and resource.resource_type=='instructor' %}selected{% endif
+                    %}>Instructor</option>
+                <option value="equipment" {% if resource and resource.resource_type=='equipment' %}selected{% endif %}>
+                    Equipment</option>
+                <option value="other" {% if resource and resource.resource_type=='other' %}selected{% endif %}>Other
+                </option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">{% if resource %}Update Resource{% else %}Create Resource{% endif
+                %}</button>
+            <a href="{{ url_for('resources') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

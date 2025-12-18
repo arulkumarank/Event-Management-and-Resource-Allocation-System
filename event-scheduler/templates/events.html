@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+<h2>Events</h2>
+
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('add_event') }}" class="btn">Add New Event</a>
+</div>
+
+<div class="card">
+    {% if events %}
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.start_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ event.end_time.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ event.description }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('edit_event', event_id=event.event_id) }}"
+                        class="btn btn-small btn-secondary">Edit</a>
+                    <a href="{{ url_for('delete_event', event_id=event.event_id) }}" class="btn btn-small btn-danger"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="no-data">
+        <p>No events found. Create your first event to get started.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
