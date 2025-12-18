@@ -9,7 +9,7 @@ with app.app_context():
     resources = [
         Resource(resource_name="Conference Room A", resource_type="room"),
         Resource(resource_name="HD Projector", resource_type="equipment"),
-        Resource(resource_name="Instructor John", resource_type="instructor"),
+        Resource(resource_name="Senathipathi", resource_type="instructor"),
         Resource(resource_name="Laptop with HDMI", resource_type="equipment")
     ]
     

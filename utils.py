@@ -19,24 +19,65 @@ def check_resource_conflict(resource_id, event_id, start_time, end_time):
     return False, None
 
 def get_all_conflicts():
+    """
+    Detects all scheduling conflicts by finding events that overlap in time.
+    Shows all time-overlapping events as potential scheduling conflicts.
+    """
     conflicts = []
-    allocations = EventResourceAllocation.query.all()
+    seen_pairs = set()  # To avoid duplicate event pairs
     
-    for i, alloc1 in enumerate(allocations):
-        event1 = Event.query.get(alloc1.event_id)
-        resource1 = Resource.query.get(alloc1.resource_id)
-        
-        for alloc2 in allocations[i+1:]:
-            if alloc1.resource_id == alloc2.resource_id:
-                event2 = Event.query.get(alloc2.event_id)
+    # Get all events
+    all_events = Event.query.order_by(Event.start_time).all()
+    
+    # Check each pair of events for time overlap
+    for i, event1 in enumerate(all_events):
+        for event2 in all_events[i+1:]:
+            # Check if events overlap in time
+            if (event1.start_time < event2.end_time and 
+                event1.end_time > event2.start_time):
                 
-                if event1 and event2:
-                    if (event1.start_time < event2.end_time and event1.end_time > event2.start_time):
-                        conflicts.append({
-                            'resource': resource1,
-                            'event1': event1,
-                            'event2': event2
-                        })
+                conflict_key = (event1.event_id, event2.event_id)
+                
+                if conflict_key not in seen_pairs:
+                    seen_pairs.add(conflict_key)
+                    
+                    # Get all resources for both events
+                    alloc1_resources = {a.resource_id for a in EventResourceAllocation.query.filter_by(event_id=event1.event_id).all()}
+                    alloc2_resources = {a.resource_id for a in EventResourceAllocation.query.filter_by(event_id=event2.event_id).all()}
+                    shared_resources = alloc1_resources.intersection(alloc2_resources)
+                    
+                    # If they share resources, add a conflict for each shared resource
+                    if shared_resources:
+                        for resource_id in shared_resources:
+                            resource = Resource.query.get(resource_id)
+                            conflicts.append({
+                                'resource': resource,
+                                'event1': event1,
+                                'event2': event2
+                            })
+                    else:
+                        # No shared resources yet, but events overlap (scheduling conflict)
+                        # Show a conflict for EACH resource that's allocated to either event
+                        all_resources = alloc1_resources.union(alloc2_resources)
+                        if all_resources:
+                            for resource_id in all_resources:
+                                resource = Resource.query.get(resource_id)
+                                conflicts.append({
+                                    'resource': resource,
+                                    'event1': event1,
+                                    'event2': event2
+                                })
+                        else:
+                            # No resources allocated to either event - create a placeholder
+                            resource = type('obj', (object,), {
+                                'resource_name': 'Time Slot',
+                                'resource_type': 'scheduling'
+                            })()
+                            conflicts.append({
+                                'resource': resource,
+                                'event1': event1,
+                                'event2': event2
+                            })
     
     return conflicts
 

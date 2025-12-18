@@ -139,6 +139,8 @@ def allocate():
         resource_ids = request.form.getlist('resource_ids')
         
         event = Event.query.get(event_id)
+        allocated_count = 0
+        conflict_count = 0
         
         for resource_id in resource_ids:
             resource_id = int(resource_id)
@@ -152,6 +154,7 @@ def allocate():
             
             if has_conflict:
                 flash(f'Conflict detected: {message}', 'error')
+                conflict_count += 1
                 continue
             
             existing = EventResourceAllocation.query.filter_by(
@@ -162,9 +165,15 @@ def allocate():
             if not existing:
                 allocation = EventResourceAllocation(event_id=event_id, resource_id=resource_id)
                 db.session.add(allocation)
+                allocated_count += 1
         
         db.session.commit()
-        flash('Resources allocated successfully', 'success')
+        
+        if allocated_count > 0:
+            flash(f'Successfully allocated {allocated_count} resource(s)', 'success')
+        elif conflict_count > 0:
+            flash('No resources were allocated due to conflicts', 'error')
+        
         return redirect(url_for('allocate'))
     
     events_list = Event.query.order_by(Event.start_time.desc()).all()

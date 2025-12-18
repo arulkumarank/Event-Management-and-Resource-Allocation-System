@@ -165,43 +165,62 @@ python seed_data.py
 
 ## Screenshots
 
-Screenshots will be added to demonstrate:
-
 ### Dashboard
-The main dashboard shows system statistics (4 events, 4 resources, 8 allocations) and quick action buttons for creating events, adding resources, and allocating resources.
+![Dashboard](screenshots/dashboard.png)
+
+The main dashboard shows system statistics and quick action buttons for creating events, adding resources, and allocating resources.
 
 ### Events Management
-View all events in a clean table format with start/end times, descriptions, and action buttons for editing or deleting events. The interface uses datetime pickers for easy time selection.
+![Events](screenshots/events.png)
+
+View all events in a clean table format with start/end times, descriptions, and action buttons for editing or deleting events.
 
 ### Resources Management
-Manage all types of resources (rooms, instructors, equipment) with a simple table view. The form includes a dropdown for resource type selection.
+![Resources](screenshots/resources.png)
+
+Manage all types of resources (rooms, instructors, equipment) with a simple table view.
 
 ### Resource Allocation
+![Allocation](screenshots/allocate.png)
+
 The allocation interface allows you to select an event and assign multiple resources via checkboxes. The system displays all current allocations in a table below the form.
 
 ### Conflict Detection
-The system automatically detects conflicts where resources are double-booked, showing:
-- Python Workshop (09:00-11:00) vs Data Science Seminar (10:00-12:00)
-- Web Development Class (14:00-16:00) vs Database Workshop (15:00-17:00)
 
-Each conflict shows the resource name, conflicting events, and exact time overlaps.
+The system automatically detects and displays all resource conflicts:
+
+**Initial State (7 conflicts):**
+![Conflict Detection - Initial](screenshots/conflict_detection_before.png)
+
+**After Testing (8 conflicts):**
+![Conflict Detection - After Allocation](screenshots/conflict_detection_after.png)
+
+The conflict detection system shows:
+- Resources that are allocated to overlapping events
+- Exact time periods of conflicts
+- All resources for each conflicting event pair
+- Real-time updates when new allocations are made
+
+Example conflicts detected:
+- Python Workshop vs Data Science Seminar (both 10:00-12:00) - HD Projector & Seminar Hall A
+- Web Development Class vs Database Workshop (14:00-16:00 / 15:00-17:00) - Laptop with HDMI & Seminar Hall A
+- Event X vs Event Y (10:00-11:00 / 10:30-11:30) - Seminar Hall B
 
 ### Utilization Report
-Generate reports for custom date ranges showing:
-- Conference Room A: 8.0 hours utilized
-- Instructor John: 4.0 hours utilized
-- HD Projector: 2.0 hours utilized
-- Laptop with HDMI: 2.0 hours utilized
+![Utilization Report](screenshots/utilizationreport.png)
 
-The report includes upcoming bookings for each resource.
+Generate reports for custom date ranges showing resource usage hours and upcoming bookings for each resource.
 
 ## Video Demonstration
 
-A complete walkthrough video demonstrating all features will be included showing:
-- Navigating through all pages
-- Viewing resources and events
-- Checking conflict detection
-- Generating utilization reports
+![Complete System Demonstration](screenshots/demo_video.webp)
+
+A complete walkthrough video demonstrating:
+- Live conflict detection testing
+- Attempting blocked allocations (shows error messages)
+- Successful allocations (increases conflict count)
+- Dynamic conflict page updates
+- All system features in action
 
 ## Project Structure
 
